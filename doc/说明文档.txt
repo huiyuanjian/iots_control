@@ -1,0 +1,63 @@
+Java 使用 sigar 实现系统监控、系统信息收集。
+
+业务版本：
+使用 slf4j，json等功能，并配置了 定时器TimerTask，执行	MonitorController.java。
+配置文件：config.properties 和 logback.xml
+
+简单版本：
+1、作者是 MacOs 系统，此系统直接下载即可使用。
+
+2、运行demo.java ,如果是其他系统，请在 /remark 下载 hyperic-sigar-1.6.4.zip 文件
+其中 /hyperic-sigar-1.6.4/sigar-bin/ 里有对应各种系统的文件。
+替换掉 根目录 下的 libsigar-universal-macosx.dylib、libsigar-universal64-macosx.dylib 即可。
+
+运行结果如下：
+----------------------------------------------------------------------
+
+CPU个数：1
+CPU的总量:2700
+获得CPU的卖主：Intel
+CPU的类别：MacBookPro12,1
+缓冲存储器数量：256
+**************
+用户使用率:18.3%
+系统使用率:5.4%
+当前等待率:0.0%
+Nice :0.0%
+当前空闲率:76.2%
+总的使用率:23.7%
+**************
+内存总量：8.00G
+当前内存使用量：7.65G
+当前内存剩余量：0.35G
+交换区总量：0.00G
+当前交换区使用量：0.00G
+当前交换区剩余量：0.00G
+
+~~~~~~~~~~0~~~~~~~~~~
+fs.getDevName() = /dev/disk1s1
+fs.getDirName() = /
+fs.getFlags() = 0
+fs.getSysTypeName() = apfs
+fs.getTypeName() = none
+fs.getType() = 1
+ DiskReads = 0
+ DiskWrites = 0
+
+OS.getArch() = x86_64
+OS.getCpuEndian() = little
+OS.getDataModel() = 64
+OS.getDescription() = Mac OS X Unknown
+OS.getMachine() = x86_64
+OS.getName() = MacOSX
+OS.getPatchLevel() = unknown
+OS.getVendor() = Apple
+OS.getVendorCodeName() = Unknown
+OS.getVendorName() = Mac OS X
+OS.getVendorVersion() = 10.13
+OS.getVersion() = 10.13.4
+
+---------------------------------------
+
+备注：sigar的工具类，下载地址 https://sourceforge.net/projects/sigar/
+

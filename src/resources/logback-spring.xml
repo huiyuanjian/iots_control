@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="D:\\log\\iots_control\\" />
+	<property name="App" value="IOTs_Control" />
+	<!-- 文件输出格式 -->
+	<property name="PATTERN"
+			  value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
+	<!-- test文件路径 -->
+	<property name="TEST_FILE_PATH"
+			  value="${LOG_HOME}${App}_%d{yyyy-MM-dd}.%i.log" />
+	<!-- pro文件路径 -->
+	<property name="PRO_FILE_PATH"
+			  value="${LOG_HOME}${App}_%d{yyyy-MM-dd}.%i.log" />
+
+	<!-- 开发、测试环境 -->
+	<springProfile name="dev,test,prod">
+		<appender name="CONSOLE"
+				  class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>${PATTERN}</pattern>
+			</encoder>
+		</appender>
+		<appender name="FILE"
+				  class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<rollingPolicy
+					class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<!--日志文件输出的文件名 -->
+				<FileNamePattern>${TEST_FILE_PATH}</FileNamePattern>
+				<timeBasedFileNamingAndTriggeringPolicy  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<!-- maxFileSize:这是活动文件的大小，默认值是10MB，测试时可改成1KB看效果 -->
+					<maxFileSize>1KB</maxFileSize>
+				</timeBasedFileNamingAndTriggeringPolicy>
+			</rollingPolicy>
+			<encoder
+					class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+				<pattern>${PATTERN}</pattern>
+			</encoder>
+		</appender>
+		<root level="info">
+			<appender-ref ref="FILE" />
+			<appender-ref ref="CONSOLE" />
+		</root>
+	</springProfile>
+
+</configuration>

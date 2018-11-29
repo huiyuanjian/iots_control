@@ -1,0 +1,74 @@
+#当前系统信息
+server:
+  ip: localhost
+  port: 8087
+  # 1:监控系统id, 2:web端系统id, 3:iots端系统id, 4:代理系统id, 5:控制系统id, 6：分发系统id
+  thisServerId: 5
+  
+#spring
+spring:
+  profiles:
+    active: dev
+#config系统配置
+sysconfig:
+  #Timer定时器
+  monitorTimer:
+    delayTime: 1000
+    intervalTime: 60000
+  #连接IOTServer的地址
+  iotServer:
+    ip: localhost
+    port: 8082
+    
+#kafka   
+kafka:
+  #生产者
+  produce:
+    bootstrap.servers: 10.10.20.171:9092
+    acks: all
+    retries: 0
+    batch.size: 16384
+    linger.ms: 1
+    buffer.memory: 33554432
+    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    value.serializer: org.apache.kafka.common.serialization.StringSerializer
+  #心跳 topic和key  topic多系统一致，key区分系统，和server.thisServerId一致
+  hearbeat:
+    topic: storage_servicestatus_topic  #hearbeat_date
+    key: 5
+
+  #l时间调度
+schedules:
+  upload: 0 0 1 * * ?  #上传日志时间
+  delete: 0 0 0 30 * ?  #删除日志时间
+
+#log日志上传 到的redis服务
+redis-two:
+  host: 10.10.20.171
+  port: 6379
+  password: 123456
+  timeout: 1000
+  database: 0
+
+
+  #模块的名称
+module:
+  name: IOTs_Control
+
+logging:
+  path: F:\\IOTS\\IOTs_Control\\
+
+# 配置信息
+config_info:
+  # 系统配置文件存放路径（当前项目中的相对路径）
+  path: /config
+  # 配置文件名称
+  file-name: collectConfig.txt
+
+# mqtt
+mqtt_host: tcp://10.10.170.128:61613
+mqtt_username: admin
+mqtt_password: password
+mqtt_clientid: clientid
+mqtt_timeout: 10
+mqtt_keepalive: 20
